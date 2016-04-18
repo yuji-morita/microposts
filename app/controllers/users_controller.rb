@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :following, :followers]
   before_action :validate_user, only: [:edit, :update]
   
   def show
+    @microposts = @user.microposts.order(created_at: :desc)
   end
 
   def new
@@ -29,6 +30,14 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def following
+    @users = @user.following_users
+  end
+  
+  def followers 
+    @users = @user.follower_users
   end
 
   private
