@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :validate_user, only: [:edit, :update]
   
   def show
+    @microposts = @user.microposts.order(created_at: :desc)
   end
 
   def new
