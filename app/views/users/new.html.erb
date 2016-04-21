@@ -11,6 +11,14 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
+      <%= f.label :group %>
+      <br />
+      
+      <label><%= f.radio_button :group, '1', {checked: true} %>男</label>
+      <label><%= f.radio_button :group, '2' %>女</label>
+      
+      <br />
+    
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 

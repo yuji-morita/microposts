@@ -1,0 +1,44 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for current_user %>
+        <%= current_user.name %>
+      </h1>
+      <div class="container">
+        <%= current_user.profile %>
+        <br />
+        <%= current_user.area %>
+      </div>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3>Preference</h3>
+    <% if @users.any? %>
+     <%= link_to (button_tag "Matching", type: 'button'),  controller: :users, action: :matching %>
+     <hr>
+    <div class="user_info">
+      <% @users.each_with_index do |user, count| %>
+      <div class="container">
+         <%= link_to gravatar_for(user, size: 30), user %>
+         <span><%= link_to user.name, user %></span>
+
+         <% if count == 0 %>
+           <%= link_to (button_tag "UP", type: 'button' , disabled: "true"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => -1%>
+         <% else %>
+           <%= link_to (button_tag "UP", type: 'button'),  controller: :users, action: :preference , params: {:followed_id => user.id , :diff => -1}%>
+         <% end %>
+         
+         <% if count == @users.count-1 %>
+           <%= link_to (button_tag "DOWN", type: 'button' , disabled: "true"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => 1%>
+         <% else %>
+           <%= link_to (button_tag "DOWN", type: 'button'),  controller: :users, action: :preference , :followed_id => user.id , :diff => 1%>
+         <% end %>
+
+         <hr>
+       </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

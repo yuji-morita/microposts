@@ -8,9 +8,13 @@
       <div class="container">
         <span><%= link_to "following", following_user_path(@user) %></span>
         <span><%= link_to "followers", followers_user_path(@user) %></span>
+        <span><%= link_to "preference", preference_user_path %></span>
+        
         <%= @user.profile %>
         <br />
         <%= @user.area %>
+        <br />
+        <%= @user.group %>
       </div>
     </section>
   </aside>

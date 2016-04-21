@@ -8,9 +8,11 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :microposts
   
-  has_many :following_relationships, class_name:  "Relationship",
+  has_many :following_relationships, -> { order(rank: :asc) } , 
+                                     class_name:  "Relationship",
                                      foreign_key: "follower_id",
-                                     dependent:   :destroy
+                                     dependent:   :destroy 
+                                     
   has_many :following_users, through: :following_relationships, source: :followed
   
   
@@ -33,6 +35,11 @@ class User < ActiveRecord::Base
   # あるユーザーをフォローしているかどうか？
   def following?(other_user)
     following_users.include?(other_user)
+  end
+  
+  # マッチングしているユーザ
+  def match_user
+    User.where(:id => match_id).first
   end
   
   def feed_items

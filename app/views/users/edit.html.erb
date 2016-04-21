@@ -17,6 +17,12 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+      <%= f.label :group %>
+      <br />
+      <label><%= f.radio_button :group, '1', {checked: true} %>男</label>
+      <label><%= f.radio_button :group, '2' %>女</label>
+      <br />
+      
       <%= f.label :area %>
       <%= f.text_field :area, class: 'form-control' %>
       
