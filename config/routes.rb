@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   
   get 'resp', to: 'microposts#resp'
- 
+  get 'check', to: 'microposts#check'
   
   resources :users
   resources :microposts

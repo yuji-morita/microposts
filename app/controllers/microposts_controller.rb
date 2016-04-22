@@ -25,6 +25,12 @@ class MicropostsController < ApplicationController
      redirect_to root_url
   end
   
+  def check
+    @micropost = Micropost.find(params[:post_id])
+    @gu_users = @micropost.gu_users
+    @bu_users = @micropost.bu_users
+  end
+  
   private
   def micropost_params
     params.require(:micropost).permit(:content)

@@ -1,0 +1,26 @@
+<% if @gu_users.any? %>
+<h3>ぐーした人</h3>
+<div class="user_info">
+<% @gu_users.each do |user| %>
+    <div class="container">
+        <%= link_to gravatar_for(user, size: 30), user %>
+        <span><%= link_to user.name, user %></span>
+        <hr>
+    </div>
+    <% end %>
+</div>
+<% end %>
+
+
+<h3>ぶーした人</h3>
+<% if @bu_users.any? %>
+    <div class="user_info">
+      <% @bu_users.each do |user| %>
+      <div class="container">
+         <%= link_to gravatar_for(user, size: 30), user %>
+         <span><%= link_to user.name, user %></span>
+         <hr>
+       </div>
+      <% end %>
+    </div>
+<% end %>

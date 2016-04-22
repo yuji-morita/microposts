@@ -13,9 +13,12 @@
   </aside>
   <div class="col-md-8">
     <h3>Preference</h3>
+
     <% if @users.any? %>
      <%= link_to (button_tag "Matching", type: 'button', class: "btn btn-danger;", style: "background-color:#F60; color:#FFF"),  controller: :users, action: :matching %>
      <%= link_to (button_tag "Create Preference", type: 'button', class: "btn btn-danger;", style: "background-color:#6C0; color:#FFF"),  controller: :users, action: :create_preference %>
+     <hr>
+     <h3>好</h3>
      <hr>
     <div class="user_info">
       <% @users.each_with_index do |user, count| %>
@@ -34,10 +37,10 @@
          <% else %>
            <%= link_to (button_tag "DOWN", type: 'button', class: "btn btn-danger;", style: "background-color:#003; color:#FFF"),  controller: :users, action: :preference , :followed_id => user.id , :diff => 1%>
          <% end %>
-
          <hr>
        </div>
       <% end %>
+       <h3>嫌</h3>
     </div>
     <% end %>
   </div>

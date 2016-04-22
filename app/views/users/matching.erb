@@ -1,29 +1,18 @@
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for current_user %>
-        <%= current_user.name %>
-      </h1>
-      <div class="container">
-        <%= current_user.profile %>
-        <br />
-        <%= current_user.area %>
-      </div>
-    </section>
-  </aside>
-  <div class="col-md-8">
+   <div class="col-md-8">
     <h3>Matching</h3>
     <% if @users.any? %>
-    
      <hr>
     <div class="user_info">
       <% @users.each_with_index do |user, count| %>
       <div class="container">
+          <% if user.id == current_user.id%>
+            <h3>Yours</h3>
+          <% end %>
          <%= link_to gravatar_for(user, size: 30), user %>
          <span><%= link_to user.name, user %></span>
          <br />
-         <%= "　"%>
+         <%= "||"%>
        </div>
         <div class="container">
             <%= link_to gravatar_for(user.match_user, size: 30), user.match_user %>
