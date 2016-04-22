@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
                                      class_name:  "Relationship",
                                      foreign_key: "follower_id",
                                      dependent:   :destroy 
+
+  has_many :following_relationships_score, -> { order(score: :desc) } , 
+                                   class_name:  "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent:   :destroy 
                                      
   has_many :following_users, through: :following_relationships, source: :followed
   
@@ -21,6 +26,14 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower
 
+
+  # お気に入り
+  has_many :favoriteships, class_name: "ResponseRelation",
+                           foreign_key: "act_id",
+                           dependent:   :destroy
+  
+  has_many :favorite_posts, through: :favoriteships, source: :post
+  
   # 他のユーザーをフォローする
   def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
@@ -39,10 +52,10 @@ class User < ActiveRecord::Base
   
   # マッチングしているユーザ
   def match_user
-    User.where(:id => match_id).first
+    User.find_by(:id => match_id)
   end
   
   def feed_items
-    Micropost.where(user_id: following_user_ids + [self.id])
+    Micropost.where(user_id: User.ids + [self.id])
   end
 end

@@ -123,6 +123,31 @@ class UsersController < ApplicationController
       @users = User.where(group: 1)
     end
   end
+  
+  def create_preference
+    if current_user.group != 1
+      @other_group = User.where(group: 1)
+      @same_group = User.where(group: 2)
+    else
+      @same_group = User.where(group: 1)
+      @other_group = User.where(group: 2)
+    end
+    
+    @other_group.each do |user|
+      @score = current_user.favoriteships.where(rec_id: user.id).sum("score")
+      @user = current_user.following_relationships.find_by(followed_id: user.id)
+      @user.score = @score
+      @user.save
+    end
+    @users = current_user.following_relationships_score
+    
+    @users.each_with_index do |user, count|
+      user.rank = count+1
+      user.save
+    end
+    
+    redirect_to preference_user_path(current_user)
+  end
 
   private
 

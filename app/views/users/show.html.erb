@@ -5,17 +5,12 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <div class="container">
-        <span><%= link_to "following", following_user_path(@user) %></span>
-        <span><%= link_to "followers", followers_user_path(@user) %></span>
-        <span><%= link_to "preference", preference_user_path %></span>
-        
+      <aside>
+        <span><%= link_to "preference", preference_user_path(@user) %></span>
         <%= @user.profile %>
         <br />
-        <%= @user.area %>
-        <br />
-        <%= @user.group %>
-      </div>
+        <%= "@" + @user.area %>
+      </aside>
     </section>
   </aside>
   <div class="col-md-8">

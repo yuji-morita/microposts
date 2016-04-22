@@ -5,17 +5,17 @@
         <%= gravatar_for current_user %>
         <%= current_user.name %>
       </h1>
-      <div class="container">
+
         <%= current_user.profile %>
         <br />
-        <%= current_user.area %>
-      </div>
+        <%= "@" + current_user.area %>
     </section>
   </aside>
   <div class="col-md-8">
     <h3>Preference</h3>
     <% if @users.any? %>
-     <%= link_to (button_tag "Matching", type: 'button'),  controller: :users, action: :matching %>
+     <%= link_to (button_tag "Matching", type: 'button', class: "btn btn-danger;", style: "background-color:#F60; color:#FFF"),  controller: :users, action: :matching %>
+     <%= link_to (button_tag "Create Preference", type: 'button', class: "btn btn-danger;", style: "background-color:#6C0; color:#FFF"),  controller: :users, action: :create_preference %>
      <hr>
     <div class="user_info">
       <% @users.each_with_index do |user, count| %>
@@ -24,15 +24,15 @@
          <span><%= link_to user.name, user %></span>
 
          <% if count == 0 %>
-           <%= link_to (button_tag "UP", type: 'button' , disabled: "true"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => -1%>
+           <%= link_to (button_tag "UP", type: 'button' , disabled: "true", class: "btn btn-primary;", style: "background-color:#C03; color:#FFF"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => -1%>
          <% else %>
-           <%= link_to (button_tag "UP", type: 'button'),  controller: :users, action: :preference , params: {:followed_id => user.id , :diff => -1}%>
+           <%= link_to (button_tag "UP", type: 'button', class: "btn btn-primary;", style: "background-color:#C03; color:#FFF"),  controller: :users, action: :preference , params: {:followed_id => user.id , :diff => -1}%>
          <% end %>
          
          <% if count == @users.count-1 %>
-           <%= link_to (button_tag "DOWN", type: 'button' , disabled: "true"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => 1%>
+           <%= link_to (button_tag "DOWN", type: 'button' , disabled: "true", class: "btn btn-danger;", style: "background-color:#003; color:#FFF"),  controller: :users, action: :preference ,disabled: :true, :followed_id => user.id , :diff => 1%>
          <% else %>
-           <%= link_to (button_tag "DOWN", type: 'button'),  controller: :users, action: :preference , :followed_id => user.id , :diff => 1%>
+           <%= link_to (button_tag "DOWN", type: 'button', class: "btn btn-danger;", style: "background-color:#003; color:#FFF"),  controller: :users, action: :preference , :followed_id => user.id , :diff => 1%>
          <% end %>
 
          <hr>

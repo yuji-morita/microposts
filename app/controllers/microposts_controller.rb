@@ -20,6 +20,10 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
   
+  def resp
+     current_user.favoriteships.find_or_create_by(act_id: params[:act_id], post_id: params[:post_id], rec_id: params[:rec_id], score: params[:score])
+     redirect_to root_url
+  end
   
   private
   def micropost_params

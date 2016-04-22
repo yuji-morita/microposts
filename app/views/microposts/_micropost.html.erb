@@ -3,10 +3,22 @@
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content"><%= micropost.content %></span>
   <span class="timestamp">
+
+    
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-    <% if current_user == micropost.user %>
-      <%= link_to "delete", micropost, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+    <% if current_user != micropost.user %>
+      <% if !current_user.favoriteships.where(post_id: micropost.id).find_by(score: 1) %>
+         <%= link_to  (button_tag "ぐー", type: 'button', class: "btn btn-primary;", style: "background-color:#00C; color:#FFF"),  controller: :microposts, action: :resp , params: {:act_id => current_user.id, :rec_id => micropost.user.id , :post_id => micropost.id, :score => 1} %>
+      <% else %>
+        <%= link_to  (button_tag "ぐー", type: 'button', disabled: "true", class: "btn btn-primary;", style: "background-color:#00C; color:#FFF"),  controller: :microposts, action: :resp , params: {:act_id => current_user.id, :rec_id => micropost.user.id , :post_id => micropost.id, :score => 1} %>
+      <% end %>
+      
+      <% if !current_user.favoriteships.where(post_id: micropost.id).find_by(score: -1) %>
+         <%= link_to  (button_tag "ぶー", type: 'button', class: "btn btn-danger;", style: "background-color:#C03; color:#FFF"),  controller: :microposts, action: :resp , params: {:act_id => current_user.id, :rec_id => micropost.user.id , :post_id => micropost.id, :score => -1} %>
+      <% else %>
+          <%= link_to  (button_tag "ぶー", type: 'button', disabled: :true, class: "btn btn-danger;", style: "background-color:#C03; color:#FFF"),  controller: :microposts, action: :resp , params: {:act_id => current_user.id, :rec_id => micropost.user.id , :post_id => micropost.id, :score => -1} %>
+      <% end %>
+      
     <% end %>
   </span>
 </li>

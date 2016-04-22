@@ -4,19 +4,10 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", '#' %></li>
         
         <% if logged_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Users <b class="caret"></b>
-          </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "following", following_user_path(current_user) %></li>
-              <li><%= link_to "followers", followers_user_path(current_user) %></li>
-            </ul>
-          </li>
-          
+          <li><%= link_to "Preference", preference_user_path(current_user) %></li>
+          <li><%= link_to "Matching", matching_user_path(current_user) %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>
@@ -31,7 +22,8 @@
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "Users", "#" %></li>
+          <li><%= link_to "Preference", "#" %></li>
+          <li><%= link_to "Matching", "#" %></li>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
