@@ -7,7 +7,6 @@ class CreateResponseRelations < ActiveRecord::Migration
       
       t.timestamps null: false
       
-      t.index [:post_id, :act_id] , unique:true
     end
   end
 end
